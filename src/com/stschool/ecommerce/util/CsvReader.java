@@ -3,26 +3,26 @@ package com.stschool.ecommerce.util;
 import com.stschool.ecommerce.model.Customer;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReader {
-    public List<Customer> getCustomersFromCsv()  {
 
+    public List<Customer> getCustomersFromCsv() {
         List<Customer> customers = new ArrayList<>();
         /*
         1. BufferedReader
         2. Each line is a customers
         3. add customer to list
          */
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("C://customers-data.csv"));
-            /*System.out.println( br.readLine());
-            System.out.println(br.readLine());*/
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(("C://customers-data.csv")));
             br.readLine();
             String customerData = br.readLine();
-            while(customerData != null){
+            while (customerData != null){
                 String[] data = customerData.split(",");
                 Customer customer = new Customer();
                 customer.setId(Integer.parseInt(data[0]));
@@ -33,9 +33,10 @@ public class CsvReader {
                 customers.add(customer);
                 customerData = br.readLine();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return customers;
     }
+
 }
